@@ -1,11 +1,12 @@
 pycohttpparser
 ==============
 
-A wrapper library around
-[picohttpparser](https://github.com/h2o/picohttpparser), a lightweight HTTP/1.1
-parsing library.
+A wrapper library around `picohttpparser`_, a lightweight HTTP/1.1 parsing
+library.
 
 This is currently a work in progress: check back often.
+
+.. _picohttpparser: https://github.com/h2o/picohttpparser
 
 License
 -------
