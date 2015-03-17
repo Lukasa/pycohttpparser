@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-picohttpparser/backend
+pycohttpparser/backend
 ~~~~~~~~~~~~~~~~~~~~~~
 
-The CFFI layer in picohttpparser.
+The CFFI layer in pycohttpparser.
 """
 import os
 

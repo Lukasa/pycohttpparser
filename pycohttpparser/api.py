@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-picohttpparser/api
+pycohttpparser/api
 ~~~~~~~~~~~~~~~~~~
 
-Defines the public API to picohttpparser.
+Defines the public API to pycohttpparser.
 """
 from collections import namedtuple
 

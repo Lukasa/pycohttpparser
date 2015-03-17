@@ -1,4 +1,4 @@
-picohttpparser
+pycohttpparser
 ==============
 
 A wrapper library around

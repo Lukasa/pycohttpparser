@@ -1,4 +1,4 @@
-import picohttpparser.api as p
+import pycohttpparser.api as p
 
 class Test(object):
     def test_basic_parsing(self):
