@@ -99,18 +99,8 @@ class Parser(object):
         # are ready. We can put the headers into a list already hung from it.
         req = Request(method, path, minor_version, [], pret)
 
-        for index in range(self._num_headers[0]):
-            header_struct = self._headers[index]
-            name_index = header_struct.name - phr_buffer
-            value_index = header_struct.value - phr_buffer
-            name_len = header_struct.name_len
-            value_len = header_struct.value_len
-
-            name = buffer[name_index:name_index+name_len]
-
-            value = buffer[value_index:value_index+value_len]
-
-            req.headers.append((name, value))
+        for header in self._build_headers(phr_buffer, buffer):
+            req.headers.append(header)
 
         return req
 
@@ -171,6 +161,16 @@ class Parser(object):
         # are ready. We can put the headers into a list already hung from it.
         req = Response(status, msg, minor_version, [], pret)
 
+        for header in self._build_headers(phr_buffer, buffer):
+            req.headers.append(header)
+
+        return req
+
+    def _build_headers(self, phr_buffer, orig_buffer):
+        """
+        Called by a parsing routine to build a collection of header names and
+        values.
+        """
         for index in range(self._num_headers[0]):
             header_struct = self._headers[index]
             name_index = header_struct.name - phr_buffer
@@ -178,10 +178,8 @@ class Parser(object):
             name_len = header_struct.name_len
             value_len = header_struct.value_len
 
-            name = buffer[name_index:name_index+name_len]
+            name = orig_buffer[name_index:name_index+name_len]
 
-            value = buffer[value_index:value_index+value_len]
+            value = orig_buffer[value_index:value_index+value_len]
 
-            req.headers.append((name, value))
-
-        return req
+            yield (name, value)
