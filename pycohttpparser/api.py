@@ -16,6 +16,11 @@ Response = namedtuple(
     'Response', ['status', 'msg', 'minor_version', 'headers', 'consumed']
 )
 
+class ParseError(Exception):
+    """
+    An invalid HTTP message was passed to the parser.
+    """
+
 class Parser(object):
     """
     A single HTTP parser object. This object can parse HTTP requests and
@@ -75,7 +80,7 @@ class Parser(object):
         if pret == -2:
             return None
         elif pret == -1:
-            raise RuntimeError("Invalid message")
+            raise ParseError("Invalid message")
 
         # If we got here we have a full request. We need to return useful
         # data. A useful trick here: all the returned char pointers are
@@ -139,7 +144,7 @@ class Parser(object):
         if pret == -2:
             return None
         elif pret == -1:
-            raise RuntimeError("Invalid message")
+            raise ParseError("Invalid message")
 
         # If we got here we have a full request. We need to return useful
         # data. A useful trick here: all the returned char pointers are

@@ -1,3 +1,5 @@
+import pytest
+
 import pycohttpparser.api as p
 
 class Test(object):
@@ -66,3 +68,57 @@ class Test(object):
             assert v1.tobytes() == v2
 
         assert r.consumed == len(data) - 2
+
+    def test_short_request(self):
+        data = (
+            b"POST /post HTTP/1.1\r\n"
+            b"User-Agent: hyper\r\n"
+            b"content-length: 2\r\n"
+        )
+        m = memoryview(data)
+
+        c = p.Parser()
+        r = c.parse_request(m)
+
+        assert r is None
+
+    def test_short_repsonse(self):
+        data = (
+            b"HTTP/1.1 200 OK\r\n"
+            b"Server: h2o\r\n"
+            b"content"
+        )
+        m = memoryview(data)
+
+        c = p.Parser()
+        r = c.parse_response(m)
+
+        assert r is None
+
+    def test_invalid_request(self):
+        data = (
+            b"POST /post HTTP/1.1\r\n"
+            b"User-Agent: hyper\r\n"
+            b"content- 2\r\n"
+            b"\r\n"
+        )
+        m = memoryview(data)
+
+        c = p.Parser()
+
+        with pytest.raises(p.ParseError):
+            r = c.parse_request(m)
+
+    def test_invalid_repsonse(self):
+        data = (
+            b"HTTP/1.1 200 OK\r\n"
+            b"Server: h2o\r\n"
+            b"content\r\n"
+            b"\r\n"
+        )
+        m = memoryview(data)
+
+        c = p.Parser()
+
+        with pytest.raises(p.ParseError):
+            r = c.parse_response(m)
