@@ -7,7 +7,7 @@ python:
   - "pypy"
 
 install:
-  - "sudo apt-get install libffi"
+  - "sudo apt-get install libffi-dev"
   - "pip install ."
   - "pip install -r test_requirements.txt"
 script: py.test -n 4 --cov pycohttpparser test.py
