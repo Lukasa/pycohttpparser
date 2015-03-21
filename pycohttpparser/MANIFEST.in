@@ -1,0 +1,1 @@
+include README.rst NOTICES LICENSE pycohttpparser/picohttpparser.c pycohttpparser/picohttpparser.h
