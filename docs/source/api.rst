@@ -6,8 +6,8 @@ pycohttpparser Python API
 This page documents pycohttpparser's Python API.
 
 An important feature to note is that, wherever possible, pycohttpparser uses
-`memoryview` objects to avoid copying data. The only objects that are not
-returned as `memoryview`s are response status codes and the HTTP minor version
+``memoryview`` objects to avoid copying data. The only objects that are not
+returned as ``memoryview``s are response status codes and the HTTP minor version
 number.
 
 .. autoclass:: pycohttpparser.api.Parser
