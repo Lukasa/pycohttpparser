@@ -49,7 +49,7 @@ setup(
     name='pycohttpparser',
     version=version,
     description='Python wrapper for picohttpparser',
-    long_description=open('README.rst').read(),
+    long_description=open('README.rst').read() + '\r\n' + open('HISTORY.rst').read(),
     author='Cory Benfield',
     author_email='cory@lukasa.co.uk',
     url='https://github.com/Lukasa/pycohttpparser',
