@@ -9,6 +9,7 @@ from collections import namedtuple
 
 from .backend import lib, ffi
 
+
 Request = namedtuple(
     'Request', ['method', 'path', 'minor_version', 'headers', 'consumed']
 )
@@ -24,7 +25,11 @@ class ParseError(Exception):
 class Parser(object):
     """
     A single HTTP parser object. This object can parse HTTP requests and
-    responses using picohttpparser. It's entirely stateless.
+    responses using picohttpparser.
+
+    This object is not thread-safe, and it does maintain state that is shared
+    across parsing requests. For this reason, make sure that access to this
+    object is synchronized if you use it across multiple threads.
     """
     def __init__(self):
         # Store some instance variables. This represents essentially static
@@ -48,11 +53,10 @@ class Parser(object):
         """
         Parses a single HTTP request from a buffer.
 
-        If there is insufficient data in the buffer, returns None. Otherwise,
-        returns a Request object.
-
         :param buffer: A ``memoryview`` object wrapping a buffer containing a
             HTTP request.
+        :returns: A :class:`Request <pycohttpparser.api.Request>` object, or
+            ``None`` if there is not enough data in the buffer.
         """
         # Allocate function inputs
         buffer_size = ffi.cast("size_t", len(buffer))
@@ -113,11 +117,10 @@ class Parser(object):
         """
         Parses a single HTTP response from a buffer.
 
-        If there is insufficient data in the buffer, returns None. Otherwise,
-        returns a Response object.
-
         :param buffer: A ``memoryview`` object wrapping a buffer containing a
             HTTP response.
+        :returns: A :class:`Response <pycohttpparser.api.Response>` object, or
+            ``None`` if there is not enough data in the buffer.
         """
         # Allocate function inputs
         buffer_size = ffi.cast("size_t", len(buffer))
