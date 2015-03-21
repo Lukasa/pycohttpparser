@@ -4,10 +4,28 @@ import os
 import re
 import sys
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+from distutils.command.build import build
+from setuptools import setup
+from setuptools.command.install import install
+
+
+# This section drawn from Donald Stufft's article on distributing CFFI
+# projects: https://caremad.io/2014/11/distributing-a-cffi-project/
+def get_ext_modules():
+    import pycohttpparser.backend
+    return [pycohttpparser.backend.ffi.verifier.get_extension()]
+
+
+class CFFIBuild(build):
+    def finalize_options(self):
+        self.distribution.ext_modules = get_ext_modules()
+        build.finalize_options(self)
+
+
+class CFFIInstall(install):
+    def finalize_options(self):
+        self.distribution.ext_modules = get_ext_modules()
+        install.finalize_options(self)
 
 # Get the version
 version_regex = r'__version__ = ["\']([^"\']*)["\']'
@@ -51,4 +69,10 @@ setup(
         'Programming Language :: Python :: 3.4',
     ],
     install_requires=['cffi'],
+    setup_requires=['cffi'],
+    cmdclass={
+        'build': CFFIBuild,
+        'install': CFFIInstall,
+    },
+    zip_safe=False,
 )
