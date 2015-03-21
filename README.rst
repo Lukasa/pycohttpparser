@@ -29,10 +29,13 @@ Then, you can start parsing your HTTP messages! For example:
     >>> r.path.tobytes()
     b'/post'
 
+For more information, see `the documentation`_.
+
 
 .. _picohttpparser: https://github.com/h2o/picohttpparser
 .. _hyper: http://hyper.readthedocs.org/
 .. _consult CFFI's documentation: https://cffi.readthedocs.org/en/latest/#installation-and-status
+.. _the documentation: http://pycohttpparser.readthedocs.org/
 
 License
 -------
