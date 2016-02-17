@@ -17,10 +17,12 @@ Response = namedtuple(
     'Response', ['status', 'msg', 'minor_version', 'headers', 'consumed']
 )
 
+
 class ParseError(Exception):
     """
     An invalid HTTP message was passed to the parser.
     """
+
 
 class Parser(object):
     """

@@ -34,8 +34,9 @@ ffi.cdef("""
                   struct phr_header* headers, size_t* num_headers,
                   size_t last_len);
 
-    int phr_parse_headers(const char* buf, size_t len, struct phr_header* headers,
-                          size_t* num_headers, size_t last_len);
+    int phr_parse_headers(const char* buf, size_t len,
+                          struct phr_header* headers, size_t* num_headers,
+                          size_t last_len);
 
     struct phr_chunked_decoder {
       size_t bytes_left_in_chunk; /* number of bytes left in current chunk */
