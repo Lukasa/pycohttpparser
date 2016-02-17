@@ -32,7 +32,7 @@ setup(
     author_email='cory@lukasa.co.uk',
     url='https://github.com/Lukasa/pycohttpparser',
     packages=find_packages('src'),
-    package_dir={'', 'src'}
+    package_dir={'', 'src'},
     license='MIT License',
     classifiers=[
         'Development Status :: 4 - Beta',
