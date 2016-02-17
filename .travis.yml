@@ -4,10 +4,13 @@ python:
   - "2.7"
   - "3.3"
   - "3.4"
+  - "3.5"
   - "pypy"
 
 install:
   - "sudo apt-get install libffi-dev python-dev"
   - "pip install ."
   - "pip install -r test_requirements.txt"
+  - "pip install flake8"
+before_script: "flake8 --max-complexity 10 src/ test.py"
 script: py.test --cov pycohttpparser test.py
