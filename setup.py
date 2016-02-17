@@ -9,7 +9,7 @@ from setuptools import setup, find_packages
 
 # Get the version
 version_regex = r'__version__ = ["\']([^"\']*)["\']'
-with open('pycohttpparser/__init__.py', 'r') as f:
+with open('src/pycohttpparser/__init__.py', 'r') as f:
     text = f.read()
     match = re.search(version_regex, text)
 
