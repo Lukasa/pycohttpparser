@@ -53,7 +53,7 @@ ffi.set_source(
     '_pycohttpparser',
     """#include <sys/types.h>
     """ + data,
-    include_dirs=["pycohttpparser"],
+    include_dirs=["src/pycohttpparser"],
 )
 
 if __name__ == '__main__':

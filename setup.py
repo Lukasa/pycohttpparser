@@ -4,7 +4,7 @@ import os
 import re
 import sys
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 # Get the version
@@ -23,8 +23,6 @@ if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist upload')
     sys.exit()
 
-packages = ['pycohttpparser']
-
 setup(
     name='pycohttpparser',
     version=version,
@@ -33,9 +31,8 @@ setup(
     author='Cory Benfield',
     author_email='cory@lukasa.co.uk',
     url='https://github.com/Lukasa/pycohttpparser',
-    packages=packages,
-    package_data={'': ['LICENSE', 'README.rst', 'NOTICES']},
-    include_package_data=True,
+    packages=find_packages('src'),
+    package_dir={'', 'src'}
     license='MIT License',
     classifiers=[
         'Development Status :: 4 - Beta',
@@ -51,6 +48,6 @@ setup(
     setup_requires=['cffi>=1.0.0'],
     zip_safe=False,
 
-    cffi_modules=["pycohttpparser/build.py:ffi"],
+    cffi_modules=["src/pycohttpparser/build.py:ffi"],
     ext_package="pycohttpparser",
 )
