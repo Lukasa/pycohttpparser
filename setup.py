@@ -32,7 +32,7 @@ setup(
     author_email='cory@lukasa.co.uk',
     url='https://github.com/Lukasa/pycohttpparser',
     packages=find_packages('src'),
-    package_dir={'', 'src'},
+    package_dir={'': 'src'},
     license='MIT License',
     classifiers=[
         'Development Status :: 4 - Beta',
@@ -47,7 +47,6 @@ setup(
     install_requires=['cffi>=1.0.0'],
     setup_requires=['cffi>=1.0.0'],
     zip_safe=False,
-
     cffi_modules=["src/pycohttpparser/build.py:ffi"],
     ext_package="pycohttpparser",
 )
