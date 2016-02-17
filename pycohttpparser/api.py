@@ -7,7 +7,7 @@ Defines the public API to pycohttpparser.
 """
 from collections import namedtuple
 
-from .backend import lib, ffi
+from ._pycohttpparser import lib, ffi
 
 
 Request = namedtuple(

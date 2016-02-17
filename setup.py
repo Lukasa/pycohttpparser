@@ -4,28 +4,8 @@ import os
 import re
 import sys
 
-from distutils.command.build import build
 from setuptools import setup
-from setuptools.command.install import install
 
-
-# This section drawn from Donald Stufft's article on distributing CFFI
-# projects: https://caremad.io/2014/11/distributing-a-cffi-project/
-def get_ext_modules():
-    import pycohttpparser.backend
-    return [pycohttpparser.backend.ffi.verifier.get_extension()]
-
-
-class CFFIBuild(build):
-    def finalize_options(self):
-        self.distribution.ext_modules = get_ext_modules()
-        build.finalize_options(self)
-
-
-class CFFIInstall(install):
-    def finalize_options(self):
-        self.distribution.ext_modules = get_ext_modules()
-        install.finalize_options(self)
 
 # Get the version
 version_regex = r'__version__ = ["\']([^"\']*)["\']'
@@ -55,7 +35,6 @@ setup(
     url='https://github.com/Lukasa/pycohttpparser',
     packages=packages,
     package_data={'': ['LICENSE', 'README.rst', 'NOTICES']},
-    package_dir={'hyper': 'hyper'},
     include_package_data=True,
     license='MIT License',
     classifiers=[
@@ -68,11 +47,10 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
     ],
-    install_requires=['cffi'],
-    setup_requires=['cffi'],
-    cmdclass={
-        'build': CFFIBuild,
-        'install': CFFIInstall,
-    },
+    install_requires=['cffi>=1.0.0'],
+    setup_requires=['cffi>=1.0.0'],
     zip_safe=False,
+
+    cffi_modules=["pycohttpparser/build.py:ffi"],
+    ext_package="pycohttpparser",
 )
