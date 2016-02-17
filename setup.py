@@ -7,17 +7,6 @@ import sys
 from setuptools import setup, find_packages
 
 
-# Get the version
-version_regex = r'__version__ = ["\']([^"\']*)["\']'
-with open('src/pycohttpparser/__init__.py', 'r') as f:
-    text = f.read()
-    match = re.search(version_regex, text)
-
-    if match:
-        version = match.group(1)
-    else:
-        raise RuntimeError("No version number found!")
-
 # Stealing this from Kenneth Reitz
 if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist upload')
@@ -25,7 +14,7 @@ if sys.argv[-1] == 'publish':
 
 setup(
     name='pycohttpparser',
-    version=version,
+    version='1.0.0',
     description='Python wrapper for picohttpparser',
     long_description=open('README.rst').read() + '\r\n' + open('HISTORY.rst').read(),
     author='Cory Benfield',
