@@ -1,1 +1,1 @@
-include README.rst NOTICES LICENSE HISTORY.rst pycohttpparser/picohttpparser.c pycohttpparser/picohttpparser.h
+include README.rst NOTICES LICENSE HISTORY.rst src/pycohttpparser/picohttpparser.c src/pycohttpparser/picohttpparser.h

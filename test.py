@@ -2,6 +2,7 @@ import pytest
 
 import pycohttpparser.api as p
 
+
 class Test(object):
     def test_basic_parsing(self):
         data = (
@@ -107,7 +108,7 @@ class Test(object):
         c = p.Parser()
 
         with pytest.raises(p.ParseError):
-            r = c.parse_request(m)
+            c.parse_request(m)
 
     def test_invalid_repsonse(self):
         data = (
@@ -121,4 +122,4 @@ class Test(object):
         c = p.Parser()
 
         with pytest.raises(p.ParseError):
-            r = c.parse_response(m)
+            c.parse_response(m)

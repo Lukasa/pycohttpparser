@@ -7,7 +7,7 @@ Defines the public API to pycohttpparser.
 """
 from collections import namedtuple
 
-from .backend import lib, ffi
+from ._pycohttpparser import lib, ffi
 
 
 Request = namedtuple(
@@ -17,10 +17,12 @@ Response = namedtuple(
     'Response', ['status', 'msg', 'minor_version', 'headers', 'consumed']
 )
 
+
 class ParseError(Exception):
     """
     An invalid HTTP message was passed to the parser.
     """
+
 
 class Parser(object):
     """
