@@ -13,9 +13,6 @@ addons:
     packages:
       - libffi-dev
       - python-dev
-install:
-  - "pip install ."
-  - "pip install -r test_requirements.txt"
-  - "pip install flake8"
+install: "./.travis/install.sh"
 before_script: "flake8 --max-complexity 10 src/ test.py"
 script: py.test --cov pycohttpparser test.py
