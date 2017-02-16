@@ -62,7 +62,10 @@ class Parser(object):
         """
         # Allocate function inputs
         buffer_size = ffi.cast("size_t", len(buffer))
-        phr_buffer = ffi.new("char []", buffer.tobytes())
+        try:
+            phr_buffer = ffi.new("char []", buffer.tobytes())
+        except:
+            phr_buffer = ffi.new("char []", buffer)
         last_len = ffi.cast("size_t", 0)
 
         # Reset the header count.
@@ -126,7 +129,10 @@ class Parser(object):
         """
         # Allocate function inputs
         buffer_size = ffi.cast("size_t", len(buffer))
-        phr_buffer = ffi.new("char []", buffer.tobytes())
+        try:
+            phr_buffer = ffi.new("char []", buffer.tobytes())
+        except AttributeError:
+            phr_buffer = ffi.new("char []", buffer)
         last_len = ffi.cast("size_t", 0)
 
         # Reset the header count.
